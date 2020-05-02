@@ -5,11 +5,16 @@ namespace App\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
+ * @ApiResource
+ * @ApiFilter(SearchFilter::class, properties={"firstName":"partial", "lastName", "company"})
+ * @ApiFilter(OrderFilter::class)
  */
 class Customer
 {

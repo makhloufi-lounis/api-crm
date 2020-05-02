@@ -3,11 +3,22 @@
 namespace App\Entity;
 
 use ApiPlatform\Core\Annotation\ApiResource;
+use ApiPlatform\Core\Annotation\ApiFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
+use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ApiResource
  * @ORM\Entity(repositoryClass="App\Repository\InvoiceRepository")
+ * @ApiResource(
+ *     attributes={
+ *          "pagination_enabled"=true,
+ *          "items_per_page"=20,
+ *          "order": {"sentAt":"desc"}
+ *     }
+ * )
+ * @ApiFilter(OrderFilter::class, properties={"amount", "sentAt"})
+ * @ApiFilter(SearchFilter::class, properties={"customer.company": "exact"})
  */
 class Invoice
 {
