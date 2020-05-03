@@ -10,11 +10,26 @@ use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\SearchFilter;
 use ApiPlatform\Core\Bridge\Doctrine\Orm\Filter\OrderFilter;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Core\Annotation\ApiSubresource;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\CustomerRepository")
  * @ApiResource(
- *    normalizationContext={
+ *     collectionOperations={
+ *          "GET"={"path"="/customers"},
+ *          "POST"
+ *      },
+ *     itemOperations={
+ *          "GET"={
+ *              "path"="/customers/{id}"
+ *          },
+ *          "PUT",
+ *          "DELETE"
+ *      },
+ *     subresourceOperations={
+            "invoices_get_subresource"={"path"="/customers/{id}/invoices"}
+ *     },
+ *     normalizationContext={
  *          "groups"={"customers_read"}
  *     }
  * )
@@ -58,6 +73,7 @@ class Customer
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Invoice", mappedBy="customer")
      * @Groups({"customers_read"})
+     * @ApiSubresource
      */
     private $invoices;
 
