@@ -17,6 +17,18 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *              "normalization_context"={"groups"={"invoices_subresource"}}
  *          }
  *     },
+ *     itemOperations={
+ *          "GET", "PUT", "DELETE",
+ *          "increment"={
+ *              "method"="post",
+ *              "path"="/invoices/{id}/increment",
+ *              "controller"="App\Controller\InvoiceIncrementationController",
+ *              "swagger_context"={
+ *                  "summary"="Increment an invoice",
+ *                  "description"="increment the time of a given invoice"
+ *              }
+ *          }
+ *     },
  *     attributes={
  *          "pagination_enabled"=true,
  *          "items_per_page"=20,

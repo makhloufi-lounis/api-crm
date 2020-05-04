@@ -10,3 +10,5 @@ api_platform:
             enabled: false
             items_per_page: 5
             client_enabled: true
+    enable_swagger_ui: true
+    enable_re_doc: true
