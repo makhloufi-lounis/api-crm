@@ -1,5 +1,12 @@
 #index:
 #    path: /
 #    controller: App\Controller\DefaultController::index
+
+#JWT login check
 api_login_check:
   path: /api/login_check
+
+#JWT refresh token
+gesdinet_jwt_refresh_token:
+  path:       /api/token/refresh
+  controller: gesdinet.jwtrefreshtoken::refresh
