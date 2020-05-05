@@ -28,3 +28,7 @@ services:
 
     App\Serializer\PatchedDateTimeNormalizer:
         tags: [serializer.normalizer]
+
+    App\EventListener\PasswordEncoderListener:
+        tags:
+            - { name : kernel.event_listener, event: kernel.view, priority: 33 }
