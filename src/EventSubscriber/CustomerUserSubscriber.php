@@ -13,13 +13,23 @@ use Symfony\Component\Security\Core\Security;
 class CustomerUserSubscriber implements EventSubscriberInterface
 {
 
+    /**
+     * @var Security
+     */
     private $security;
 
+    /**
+     * CustomerUserSubscriber constructor.
+     * @param Security $security
+     */
     public function __construct(Security $security)
     {
         $this->security = $security;
     }
 
+    /**
+     * @return array|array[]
+     */
     public static function getSubscribedEvents()
     {
         return [
@@ -27,6 +37,9 @@ class CustomerUserSubscriber implements EventSubscriberInterface
         ];
     }
 
+    /**
+     * @param ViewEvent $event
+     */
     public function setUserForCustomer(ViewEvent $event)
     {
         $result = $event->getControllerResult();
