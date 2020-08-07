@@ -1,3 +1,6 @@
+//On importe les import important
+import React from 'react'
+import ReactDom from 'react-dom'
 /*
  * Welcome to your app's main JavaScript file!
  *
@@ -12,3 +15,10 @@ import '../css/app.css';
 // import $ from 'jquery';
 
 console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
+
+const App = () => {
+    return <h1>Bonjour à tous !</h1>
+}
+
+const rootElement = document.querySelector("#app")
+ReactDom.render(<App />, rootElement)
