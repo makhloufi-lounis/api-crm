@@ -26,6 +26,7 @@ const App = () => {
             <Navbar />
             <main className="container pt-5">
                 <Switch>
+                    <Route path="/customers" component={CustomersPage} />
                     <Route path="/" component={HomePage} />                    
                 </Switch>
             </main>
