@@ -32,7 +32,11 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     },
  *     normalizationContext={
  *          "groups"={"customers_read"}
- *     }
+ *     },
+ *     attributes={
+ *          "pagination_enabled"=true,
+ *          "items_per_page"=10,
+ *     },
  * )
  * @ApiFilter(SearchFilter::class, properties={"firstName":"partial", "lastName", "company"})
  * @ApiFilter(OrderFilter::class)

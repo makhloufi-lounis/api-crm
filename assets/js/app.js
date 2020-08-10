@@ -14,6 +14,7 @@ import Navbar from './components/Navbar';
 import HomePage from './pages/HomePage';
 import { HashRouter, Switch, Route } from "react-router-dom"
 import CustomersPage from './pages/CustomersPage';
+import CustomersPageWithPagination from './pages/CustomersPageWithPagination';
 
 // Need jQuery? Install it with "yarn add jquery", then uncomment to import it.
 // import $ from 'jquery';

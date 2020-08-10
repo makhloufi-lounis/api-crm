@@ -2,17 +2,24 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import Pagination from '../components/Pagination'
 
-const CustomersPage = (props) => {
+const CustomersPageWithPagination = (props) => {
 
     const [customers, setCustomers] = useState([])
     const [currentPage, setCurrentPage] = useState(1)
+    const [totalItems, setTotalItems] = useState(0)
+    const [loading, setLoading] = useState(true)
+
+    const itemsPerPage = 10
 
     useEffect(() => {
-        axios.get("https://localhost:8002/api/customers")
-        .then(response => response.data['hydra:member'])
-        .then(data => setCustomers(data))
+        axios.get(`https://localhost:8002/api/customers?pagination=true&count=${ itemsPerPage }&page=${ currentPage }`)
+        .then(response => {
+            setCustomers(response.data['hydra:member'])
+            setTotalItems(response.data['hydra:totalItems'])
+            setLoading(false)
+        })
         .catch(error => console.log(error.response))
-    }, [])
+    }, [currentPage])
     
     const handleDelete = (id) => {
 
@@ -32,16 +39,12 @@ const CustomersPage = (props) => {
 
     const handlePageChange = page => {
         setCurrentPage(page)
+        setLoading(true)
     }
-
-    const itemsPerPage = 10
-
-    const paginatedCustomers = Pagination.getData(customers, currentPage, itemsPerPage)
 
     return ( 
         <>
-            <h1>Liste des clients</h1>
-            
+            <h1>Liste des clients (pagination)</h1>
             <table className="table table-hover">
                 <thead>
                     <tr>
@@ -55,7 +58,12 @@ const CustomersPage = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {paginatedCustomers.map( customer =>
+                    {loading && 
+                        <tr>
+                            <td>Chargement ...</td>
+                        </tr>
+                    }
+                    {!loading && customers.map( customer =>
                         <tr key={customer.id}>
                             <td>{customer.id}</td>
                             <td>
@@ -83,9 +91,9 @@ const CustomersPage = (props) => {
                     
                 </tbody>
             </table>
-            <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} length={customers.length} onPageChange={handlePageChange}/>
+            <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} length={totalItems} onPageChange={handlePageChange}/>
         </>
      );
 }
  
-export default CustomersPage;
+export default CustomersPageWithPagination;
