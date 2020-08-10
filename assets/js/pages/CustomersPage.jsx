@@ -34,7 +34,9 @@ const CustomersPage = (props) => {
         setCurrentPage(page)
     }
 
-    
+    const itemsPerPage = 10
+
+    const paginatedCustomers = Pagination.getData(customers, currentPage, itemsPerPage)
 
     return ( 
         <>
@@ -51,7 +53,7 @@ const CustomersPage = (props) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {customers.map( customer =>
+                    {paginatedCustomers.map( customer =>
                         <tr key={customer.id}>
                             <td>{customer.id}</td>
                             <td>
@@ -79,6 +81,7 @@ const CustomersPage = (props) => {
                     
                 </tbody>
             </table>
+            <Pagination currentPage={currentPage} itemsPerPage={itemsPerPage} length={customers.length} onPageChange={handlePageChange}/>
         </>
      );
 }
