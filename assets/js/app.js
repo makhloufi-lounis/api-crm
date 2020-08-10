@@ -22,10 +22,14 @@ console.log('Hello Webpack Encore! Edit me in assets/js/app.js');
 
 const App = () => {
     return (
-        <>
+        <HashRouter>
             <Navbar />
-            <HomePage />
-        </>
+            <main className="container pt-5">
+                <Switch>
+                    <Route path="/" component={HomePage} />                    
+                </Switch>
+            </main>
+        </HashRouter>
     )
     
 }
