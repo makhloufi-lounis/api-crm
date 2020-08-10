@@ -60,7 +60,7 @@ security:
         # - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/api/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/token/refresh, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api/customers, roles: IS_AUTHENTICATED_FULLY }
+        - { path: ^/api/customers, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/api/invoices, roles: IS_AUTHENTICATED_FULLY }
         - {
             path: ^/api/users,
