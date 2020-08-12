@@ -61,7 +61,6 @@ const CustomersPage = (props) => {
 
     // Pagination des données
     const itemsPerPage = 10
-
     const paginatedCustomers = Pagination.getData(
         filteredCustomers, 
         currentPage, 
