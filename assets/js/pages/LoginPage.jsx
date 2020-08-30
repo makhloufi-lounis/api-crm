@@ -1,6 +1,7 @@
 import React, { useState, useContext } from 'react'
 import AuthApi from '../services/AuthApi'
 import AuthContext from '../Contexts/AuthContext'
+import Field from '../components/forms/Field'
 
 // history est une props transmet par le composant react-router-dom (dans notre cas Route)
 const LoginPage = ({ history }) => {
@@ -51,39 +52,20 @@ const LoginPage = ({ history }) => {
         <>
             <h1>Connexion a l'application</h1>
             <form onSubmit={handleSubmit}>
-                <div className="form-group">
-                    <label 
-                        htmlFor="username">
-                        Adress email
-                    </label>
-                    <input 
-                        type="email" 
-                        placeholder="Adresse email de connexion" 
-                        name="username"
-                        id="username"
-                        value={credentials.username}
-                        className={"form-control" + (error && " is-invalid") }
-                        onChange={event => handleChange(event)}/>
-                    { 
-                        error && 
-                        <p className="invalid-feedback">
-                            {error}
-                        </p>
-                    }
-                </div>
-                <div className="form-group">
-                    <label 
-                        htmlFor="password">
-                        Mot de passe
-                    </label>
-                    <input 
-                        type="password" 
-                        name="password"
-                        id="password"
-                        value={credentials.password}
-                        className="form-control" 
-                        onChange={event => handleChange(event)} />
-                </div>
+                <Field 
+                    name="username"
+                    type="email"
+                    label="Adress email"
+                    value={credentials.username}
+                    onChange={event => handleChange(event)}
+                    placeholder="Adresse email de connexion"
+                    error={error} />
+                <Field
+                    name="password"
+                    type="password"
+                    label="Mot de passe"
+                    value={credentials.password}
+                    onChange={event => handleChange(event)} />
                 <div className="form-group">
                     <button 
                         type="submit" 

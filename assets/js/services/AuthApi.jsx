@@ -63,6 +63,7 @@ function setAxiosToken(token) {
 
 /**
  * Permet de savoir si on est authentifié ou pas
+ * @returns boolean
  */
 function isAuthenticated () {
 
