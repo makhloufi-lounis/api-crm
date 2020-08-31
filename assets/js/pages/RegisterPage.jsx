@@ -3,9 +3,9 @@ import Field from "../components/forms/Field";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import UsersApi from "../services/UsersApi";
+import { toast } from "react-toastify";
 
 const RegisterPgae = ({ history }) => {
-
   const [user, setUser] = useState({
     firstName: "",
     lastName: "",
@@ -34,17 +34,19 @@ const RegisterPgae = ({ history }) => {
 
     const apiErrors = {};
     if (user.password !== user.passwordConfirm) {
-        apiErrors.passwordConfirm = "Votre confirmation de mot de passe n'est pas valide";
-        setErrors(apiErrors);
-        return;
+      apiErrors.passwordConfirm =
+        "Votre confirmation de mot de passe n'est pas valide";
+      setErrors(apiErrors);
+      toast.error("Des erreurs dans votre formulaire !");
+      return;
     }
 
     try {
       await UsersApi.create(user);
-        setErrors({});
-        // TODO : Flash success
-        history.replace("/login");
-    } catch ({response}) {
+      setErrors({});
+      toast.success("Vous êtes désormais inscrit, vous povez vous connecté");
+      history.replace("/login");
+    } catch ({ response }) {
       console.log(error.response);
       const { violations } = response.data;
       if (violations) {
@@ -52,7 +54,7 @@ const RegisterPgae = ({ history }) => {
           apiErrors[violation.propertyPath] = violation.message;
         });
         setErrors(apiErrors);
-         // TODO : Flash erreurs
+        toast.error("Des erreurs dans votre formulaire !");
       }
     }
   };

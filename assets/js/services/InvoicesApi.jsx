@@ -1,25 +1,26 @@
-import axios from 'axios'
+import axios from "axios";
 
 function findAll() {
-    return axios.get("https://127.0.0.1:8002/api/invoices")
-    .then(response => response.data['hydra:member'])
+  return axios
+    .get("https://127.0.0.1:8002/api/invoices")
+    .then((response) => response.data["hydra:member"]);
 }
 
 function deleteInvoice(id) {
-    return axios.delete("https://127.0.0.1:8002/api/invoices/" + id)
+  return axios.delete("https://127.0.0.1:8002/api/invoices/" + id);
 }
 
 function find(id) {
-    return axios
+  return axios
     .get("https://127.0.0.1:8002/api/invoices/" + id)
-    .then((response) => response.data)
+    .then((response) => response.data);
 }
 
 function update(id, invoice) {
-    return axios.put("https://127.0.0.1:8002/api/invoices/" + id, {
-      ...invoice,
-      customer: `/api/customers/${invoice.customer}`,
-    });
+  return axios.put("https://127.0.0.1:8002/api/invoices/" + id, {
+    ...invoice,
+    customer: `/api/customers/${invoice.customer}`,
+  });
 }
 
 function create(invoice) {
@@ -30,9 +31,9 @@ function create(invoice) {
 }
 
 export default {
-    findAll,
-    delete: deleteInvoice,
-    find,
-    update,
-    create
-}
+  findAll,
+  delete: deleteInvoice,
+  find,
+  update,
+  create,
+};

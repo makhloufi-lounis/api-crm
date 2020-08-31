@@ -15,27 +15,28 @@ import React from 'react';
  * - type
  * - error 
  */
-const Field = ( { name, type="text", label, value, onChange, placeholder="", error="" }) => ( 
-        <div className="form-group">
-            <label 
-                htmlFor={name}>
-                {label}
-            </label>
-            <input 
-                type={type} 
-                placeholder={placeholder || label} 
-                name={name}
-                id={name}
-                value={value}
-                className={"form-control" + (error && " is-invalid") }
-                onChange={onChange}/>
-            { 
-                error && 
-                <p className="invalid-feedback">
-                    {error}
-                </p>
-            }
-        </div>
+const Field = ({
+  name,
+  type = "text",
+  label,
+  value,
+  onChange,
+  placeholder = "",
+  error = "",
+}) => (
+  <div className="form-group">
+    <label htmlFor={name}>{label}</label>
+    <input
+      type={type}
+      placeholder={placeholder || label}
+      name={name}
+      id={name}
+      value={value}
+      className={"form-control" + (error && " is-invalid")}
+      onChange={onChange}
+    />
+    {error && <p className="invalid-feedback">{error}</p>}
+  </div>
 );
 
  
